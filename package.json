@@ -1,12 +1,17 @@
 {
-  "name": "grapqhl-api",
+  "name": "graphql-api",
   "version": "0.0.1",
-  "description": "practicing grapqhql api to get hands on experience",
+  "description": "practicing graphql api to get hands on experience",
   "main": "scr/index.ts",
   "author": "Deepak",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev src/index.ts"
+    "migrate": "prisma migrate dev",
+    "dev": "ts-node-dev src/index.ts",
+    "start": "docker-compose -f docker-compose.yml up -d && prisma migrate dev",
+    "stop": "docker-compose -f docker-compose.yml down",
+    "build": "docker-compose -f docker-compose.yml build",
+    "logs": "docker-compose -f docker-compose.yml logs -f"
   },
   "dependencies": {
     "@apollo/server": "^4.11.2",

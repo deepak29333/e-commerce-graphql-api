@@ -17,8 +17,6 @@ const server = new ApolloServer({
   context: () => ({prisma}),
 });
 
-
-
 server.listen().then(({url}) => {
   console.log(`🚀 Server ready at ${url}`);
 });

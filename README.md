@@ -40,3 +40,12 @@ Note:-
 
 #After running the above commands,
 whenever you start again you just need to run yarn dev to start the server.
+
+
+# Update Yarn version
+Run the following command to update the yarn version
+
+1. Cmd: corepack enable
+2. Cmd: corepack prepare yarn@4.5.3
+3. Cmd: corepack prepare --activate yarn@4.5.3
+4. Cmd: yarn -v     Output: 4.5.3

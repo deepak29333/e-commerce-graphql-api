@@ -6,8 +6,8 @@ It is built with TypeScript, Postgresql, Apollo-server and JavaScript, and uses 
 
 
 ### Prerequisites
-node 20
-docker
+node 20,
+docker,
 docker-compose
 
 Instructions on how to install and set up the project.

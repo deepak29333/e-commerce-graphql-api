@@ -14,7 +14,8 @@
     "start": "docker-compose -f docker-compose.yml up -d && prisma migrate dev",
     "stop": "docker-compose -f docker-compose.yml down",
     "build": "tsc",
-    "logs": "docker-compose -f docker-compose.yml logs -f"
+    "logs": "docker-compose -f docker-compose.yml logs -f",
+    "run-server": "prisma migrate dev && node ./dist/src/index.js"
   },
   "dependencies": {
     "@apollo/server": "^4.11.2",

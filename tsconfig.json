@@ -1,4 +1,4 @@
-  {
+{
   "compilerOptions": {
     "target": "ES2020",
     "module": "commonjs",
@@ -6,8 +6,11 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "rootDir": "./src"
   },
-  "include": ["./src/**/*"],
-//  "include": ["**/*.ts", "**/*.graphql"]
+  "include": [
+    "./src/**/*"
+  ]
+  //  "include": ["**/*.ts", "**/*.graphql"]
 }

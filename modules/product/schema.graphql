@@ -4,7 +4,7 @@ type Product{
     price: Float!
     description: String!
     createdAt: String!
-    category: String
+    #    image: Image!
     updatedAt: String!
 }
 
@@ -14,6 +14,11 @@ input CreateProductDto {
     price: Float!
     category: String
 }
+
+#type Image {
+#    id: ID!
+#    url: String!
+#}
 
 type Query {
     getProducts(filter: String, sortKey: String, reverse:Boolean, take : Int, skip : Int): [Product!]!

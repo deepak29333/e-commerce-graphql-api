@@ -7,10 +7,13 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
-    "rootDir": "./"
+    "rootDir": "./src"
   },
   "include": [
     "./"
+  ],
+  "exclude": [
+    "node_modules"
   ]
   //  "include": ["**/*.ts", "**/*.graphql"]
 }

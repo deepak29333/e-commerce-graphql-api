@@ -13,9 +13,10 @@
     "dev": "ts-node src/index.ts",
     "start": "docker-compose -f docker-compose.yml up -d && prisma migrate dev",
     "stop": "docker-compose -f docker-compose.yml down",
-    "build": "rimraf dist && tsc",
+    "build": "rimraf dist && tsc && prisma generate",
     "logs": "docker-compose -f docker-compose.yml logs -f",
-    "run-server": "prisma migrate dev && node ./dist/index.js"
+    "run-server": "prisma migrate dev && node ./dist/index.js",
+    "vercel-build": "prisma migrate deploy && npm run build"
   },
   "pre-commit": [
     "ts.check",

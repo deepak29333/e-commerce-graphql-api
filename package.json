@@ -15,7 +15,7 @@
     "stop": "docker-compose -f docker-compose.yml down",
     "build": "rimraf dist && tsc",
     "logs": "docker-compose -f docker-compose.yml logs -f",
-    "run-server": "prisma migrate dev && node ./dist/src/index.js"
+    "run-server": "prisma migrate dev && node ./dist/index.js"
   },
   "pre-commit": [
     "ts.check",
@@ -39,5 +39,8 @@
   "devDependencies": {
     "pre-commit": "^1.2.2",
     "rimraf": "^6.0.1"
+  },
+  "prisma": {
+    "schema": "./prisma/schema.prisma"
   }
 }

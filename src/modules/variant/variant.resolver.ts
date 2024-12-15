@@ -1,5 +1,5 @@
 import {VariantService} from "./VariantService";
-import {prisma} from "../../prisma/prismaClient";
+import {prisma} from "../../db/prismaClient";
 import {GraphQLResolveInfo} from "graphql/type";
 import {getSelectedFields} from "../../utils/generalFunctions";
 

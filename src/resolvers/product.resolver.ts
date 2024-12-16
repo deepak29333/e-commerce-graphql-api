@@ -1,6 +1,6 @@
 
-import {ProductService} from "./product.service";
-import {prisma} from "../../db/prismaClient";
+import {ProductService} from "../services/product.service";
+import {prisma} from "../db/prismaClient";
 const productService = new ProductService(prisma);
 
 export async function getProducts(_: any, args?: any) {

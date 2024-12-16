@@ -5,13 +5,16 @@ export class ProductService {
   constructor(private prisma: PrismaClient) {
   }
 
-  async getProducts(args?: any) {
-
-    const {filter, sortKey, reverse,} = args;
+  async getProducts(args?: any, requestedFields?: string[]) {
 
     //pagination
     const take = args.take ?? 10;
     const skip = args.skip ?? 0;
+    const variantTake = args.variantTake ?? 10;
+    const variantSkip = args.variantSkip ?? 0;
+
+    const include:any = requestedFields?.includes('variants') ? {variants: {take: variantTake, skip: variantSkip, orderBy: {id: 'asc'}}} : undefined;
+    const {filter, sortKey, reverse,} = args;
 
     //filter/search
     const where = filter ? {
@@ -24,7 +27,13 @@ export class ProductService {
     //sorting
     const sortOrder: any = reverse ? 'desc' : 'asc';
     const orderBy = sortKey ? {[sortKey]: sortOrder,} : {};
-    return this.prisma.product.findMany({where, orderBy, take, skip});
+    return await this.prisma.product.findMany({
+      where,
+      orderBy,
+      take,
+      skip,
+      include
+    });
   }
 
   async getProduct(id: number) {

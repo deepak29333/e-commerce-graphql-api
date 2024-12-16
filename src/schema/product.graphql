@@ -4,8 +4,8 @@ type Product{
     price: Float!
     description: String!
     createdAt: String!
-    #    image: Image!
     updatedAt: String!
+    variants: [Variant!]!
 }
 
 input CreateProductDto {
@@ -21,7 +21,7 @@ input CreateProductDto {
 #}
 
 type Query {
-    getProducts(filter: String, sortKey: String, reverse:Boolean, take : Int, skip : Int): [Product!]!
+    getProducts(filter: String, sortKey: String, reverse:Boolean, take : Int, skip : Int, variantTake:Int, variantSkip:Int): [Product!]!
     getProduct(id: Int!): Product
 }
 

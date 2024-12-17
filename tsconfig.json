@@ -6,8 +6,20 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["src/*", "node_modules/*"]
+    },
+    "resolveJsonModule": true
   },
-//  "include": ["src"],
-  "include": ["**/*.ts", "**/*.graphql"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.graphql"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

@@ -6,16 +6,23 @@
   "author": "Deepak",
   "license": "MIT",
   "require": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0"
   },
   "scripts": {
     "migrate": "prisma migrate dev",
-    "dev": "ts-node-dev src/index.ts",
+    "dev": "ts-node src/index.ts",
     "start": "docker-compose -f docker-compose.yml up -d && prisma migrate dev",
     "stop": "docker-compose -f docker-compose.yml down",
-    "build": "docker-compose -f docker-compose.yml build",
-    "logs": "docker-compose -f docker-compose.yml logs -f"
+    "build": "rimraf dist && tsc && prisma generate",
+    "logs": "docker-compose -f docker-compose.yml logs -f",
+    "run-server": "prisma migrate dev && node ./dist/index.js",
+    "vercel-build": "prisma migrate deploy && npm run build"
   },
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+  ],
   "dependencies": {
     "@apollo/server": "^4.11.2",
     "@graphql-tools/load-files": "^7.0.0",
@@ -29,8 +36,12 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   },
+  "packageManager": "yarn@4.5.3",
   "devDependencies": {
-    "ts-node-dev": "^2.0.0"
+    "pre-commit": "^1.2.2",
+    "rimraf": "^6.0.1"
   },
-  "packageManager": "yarn@4.5.3"
+  "prisma": {
+    "schema": "./prisma/schema.prisma"
+  }
 }

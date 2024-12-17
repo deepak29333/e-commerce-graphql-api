@@ -1,13 +1,11 @@
-import {PrismaClient} from '@prisma/client';
 import {makeExecutableSchema} from '@graphql-tools/schema';
 import {ApolloServer} from 'apollo-server';
-import {resolvers} from "../resolvers/resolvers";
 import {mergeTypeDefs} from "@graphql-tools/merge";
 import {loadFilesSync} from "@graphql-tools/load-files";
+import {resolvers} from "./resolvers/resolvers";
+import {prisma} from "./db/prismaClient";
 
-const prisma = new PrismaClient();
-
-const typesArray = loadFilesSync('./modules/**/*.graphql');
+const typesArray = loadFilesSync('./src/schema/*.graphql');
 const typeDefs = mergeTypeDefs(typesArray);
 const schema = makeExecutableSchema({typeDefs, resolvers});
 
@@ -18,5 +16,5 @@ const server = new ApolloServer({
 });
 
 server.listen().then(({url}) => {
-  console.log(`🚀 Server ready at ${url}`);
+  console.log(`🚀 Server ready at ${url}graphql.json`);
 });

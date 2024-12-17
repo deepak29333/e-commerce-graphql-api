@@ -1,7 +1,7 @@
-import {VariantService} from "./VariantService";
-import {prisma} from "../../prisma/prismaClient";
+import {VariantService} from "../services/VariantService";
+import {prisma} from "../db/prismaClient";
 import {GraphQLResolveInfo} from "graphql/type";
-import {getSelectedFields} from "../../utils/generalFunctions";
+import {getSelectedFields} from "../utils/generalFunctions";
 
 const variantService = new VariantService(prisma);
 

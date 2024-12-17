@@ -22,7 +22,7 @@ input CreateProductDto {
 
 type Query {
     getProducts(filter: String, sortKey: String, reverse:Boolean, take : Int, skip : Int, variantTake:Int, variantSkip:Int): [Product!]!
-    getProduct(id: Int!): Product
+    getProduct(id: Int!,variantTake : Int, variantSkip : Int): Product
 }
 
 type Mutation {

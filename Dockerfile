@@ -1,23 +1,32 @@
-FROM node:22-slim
+# Use full Node.js image instead of slim
+FROM node:22
 
 WORKDIR /app
 
-# Copy all files
+# Install OpenSSL first
+RUN apt-get update -y && \
+    apt-get install -y openssl
+
+# Copy package files first for better caching
+COPY package.json yarn.lock ./
+COPY prisma ./prisma/
+
+# Enable Corepack and set up Yarn
+RUN corepack enable && \
+    corepack prepare yarn@4.5.3 --activate
+
+# Install dependencies and generate Prisma client
+RUN yarn install && \
+    yarn prisma generate
+
+# Copy rest of the application
 COPY . .
 
-# Enable Corepack and set up Yarn with non-root user
-RUN corepack enable && \
-    corepack prepare yarn@4.5.3 --activate && \
-    chown -R node:node /app
+# Set permissions
+RUN chown -R node:node /app
 
 # Switch to non-root user
 USER node
-
-# Install dependencies
-RUN yarn install
-
-# Generate Prisma client
-RUN yarn prisma generate
 
 # Build the application
 RUN yarn build

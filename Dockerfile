@@ -7,6 +7,9 @@ WORKDIR /app
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
+# Enable Corepack
+RUN corepack enable
+
 # Install dependencies
 RUN yarn install
 

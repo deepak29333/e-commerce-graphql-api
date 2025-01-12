@@ -9,6 +9,7 @@ COPY package*.json ./
 
 # Enable Corepack
 RUN corepack enable
+RUN corepack prepare yarn@4.5.0 --activate
 
 # Install dependencies
 RUN yarn install
@@ -20,6 +21,8 @@ COPY . .
 EXPOSE 3000
 
 # Start the application
+CMD ["sh", "-c", "yarn migrate && yarn dev"]
+
 #CMD ["sh", "-c", "npx prisma migrate deploy && yarn dev"]
-CMD ["yarn","migrate"]
-CMD ["yarn", "dev"]
+# CMD ["yarn","migrate"]
+# CMD ["yarn", "dev"]

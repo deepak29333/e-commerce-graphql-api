@@ -1,28 +1,31 @@
-# Use the official Node.js image as the base image
-FROM node:22
+FROM node:22-slim
 
-# Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Copy all files
+COPY . .
 
-# Enable Corepack
-RUN corepack enable
-RUN corepack prepare yarn@4.5.3 --activate
+# Enable Corepack and set up Yarn with non-root user
+RUN corepack enable && \
+    corepack prepare yarn@4.5.3 --activate && \
+    chown -R node:node /app
+
+# Switch to non-root user
+USER node
 
 # Install dependencies
 RUN yarn install
 
-# Copy the rest of the application code
-COPY . .
+# Generate Prisma client
+RUN yarn prisma generate
 
-# Expose the application port
+# Build the application
+RUN yarn build
+
 EXPOSE 3000
 
-# Start the application
-CMD ["sh", "-c", "yarn migrate && yarn dev"]
+# Set environment variable to indicate production
+ENV NODE_ENV=production
 
-#CMD ["sh", "-c", "npx prisma migrate deploy && yarn dev"]
-# CMD ["yarn","migrate"]
-# CMD ["yarn", "dev"]
+# Start command
+CMD ["yarn", "start-production"]

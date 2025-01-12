@@ -9,12 +9,14 @@ const typesArray = loadFilesSync('./src/schema/*.graphql');
 const typeDefs = mergeTypeDefs(typesArray);
 const schema = makeExecutableSchema({typeDefs, resolvers});
 
+const PORT = process.env.PORT || 4000;
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: () => ({prisma}),
 });
 
-server.listen().then(({url}) => {
-  console.log(`🚀 Server ready at ${url}graphql.json`);
+server.listen({ port: PORT }).then(({url}) => {
+  console.log(`🚀 Server ready at ${url}`);
 });

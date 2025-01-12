@@ -9,7 +9,7 @@ COPY package*.json ./
 
 # Enable Corepack
 RUN corepack enable
-RUN corepack prepare yarn@4.5.0 --activate
+RUN corepack prepare yarn@4.5.3 --activate
 
 # Install dependencies
 RUN yarn install

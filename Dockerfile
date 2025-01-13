@@ -1,40 +1,32 @@
-# Use full Node.js image instead of slim
-FROM node:22
+FROM node:22-alpine
 
 WORKDIR /app
 
-# Install OpenSSL first
-RUN apt-get update -y && \
-    apt-get install -y openssl
-
-# Copy package files first for better caching
+# Copy package files
 COPY package.json yarn.lock ./
-COPY prisma ./prisma/
+COPY .yarn ./.yarn
+COPY .yarnrc.yml ./
 
-# Enable Corepack and set up Yarn
-RUN corepack enable && \
-    corepack prepare yarn@4.5.3 --activate
+# Install dependencies
+RUN corepack enable
+RUN yarn install
 
-# Install dependencies and generate Prisma client
-RUN yarn install && \
-    yarn prisma generate
+# Copy project files
+COPY prisma ./prisma
+COPY src ./src
+COPY tsconfig.json ./
 
-# Copy rest of the application
-COPY . .
+# Generate Prisma client
+RUN yarn prisma generate
 
-# Set permissions
-RUN chown -R node:node /app
-
-# Switch to non-root user
-USER node
-
-# Build the application
+# Build TypeScript
 RUN yarn build
 
-EXPOSE 3000
+# Expose port
+EXPOSE 4000
 
-# Set environment variable to indicate production
+# Set environment variables
 ENV NODE_ENV=production
 
-# Start command
+# Start the server
 CMD ["yarn", "start-production"]

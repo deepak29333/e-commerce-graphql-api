@@ -13,7 +13,13 @@ export class ProductService {
     const variantTake = args.variantTake ?? 10;
     const variantSkip = args.variantSkip ?? 0;
 
-    const include:any = requestedFields?.includes('variants') ? {variants: {take: variantTake, skip: variantSkip, orderBy: {id: 'asc'}}} : undefined;
+    const include: any = requestedFields?.includes('variants') ? {
+      variants: {
+        take: variantTake,
+        skip: variantSkip,
+        orderBy: {id: 'asc'}
+      }
+    } : undefined;
     const {filter, sortKey, reverse,} = args;
 
     //filter/search
@@ -36,8 +42,18 @@ export class ProductService {
     });
   }
 
-  async getProduct(id: number) {
-    return await this.prisma.product.findUnique({where: {id: id}});
+  async getProduct(args: any, requestedFields?: string[]) {
+    const id = +args.id;
+    const variantTake = args.variantTake ?? 10;
+    const variantSkip = args.variantSkip ?? 0;
+    const include: any = requestedFields?.includes('variants') ? {
+      variants: {
+        take: variantTake,
+        skip: variantSkip,
+        orderBy: {id: 'asc'}
+      }
+    } : undefined;
+    return await this.prisma.product.findUnique({where: {id: id}, include});
   }
 
   async createProduct(args: any) {

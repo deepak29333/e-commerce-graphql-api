@@ -8,7 +8,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 
-const typesArray = loadFilesSync('./src/schema/*.graphql');
+const typesArray = loadFilesSync('./src/graphql/*.graphql');
 const typeDefs = mergeTypeDefs(typesArray);
 const schema = makeExecutableSchema({typeDefs, resolvers});
 
@@ -29,6 +29,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: () => ({prisma}),
+  introspection: true,
 });
 
 // server.listen({ port: PORT }).then(({url}) => {

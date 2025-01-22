@@ -1,0 +1,19 @@
+type Product{
+    id: ID!
+    name: String!
+    price: Float!
+    description: String!
+    createdAt: String!
+    updatedAt: String!
+    variants: [Variant!]!
+}
+
+type Variant{
+    id: ID!
+    name: String!
+    price: Float!
+    createdAt: String!
+    updatedAt: String!
+    product: Product!
+}
+

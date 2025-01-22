@@ -1,6 +1,7 @@
 FROM node:22-alpine
 
 WORKDIR /app
+RUN apk add --no-cache openssl
 
 # Copy package files
 COPY package.json yarn.lock ./

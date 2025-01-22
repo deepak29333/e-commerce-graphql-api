@@ -1,22 +1,32 @@
-# Use the official Node.js image as the base image
-FROM node:22
+FROM node:22-alpine
 
-# Set the working directory
 WORKDIR /app
+RUN apk add --no-cache openssl
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Copy package files
+COPY package.json yarn.lock ./
+COPY .yarnrc.yml ./
 
-# Install dependencies
+# Enable Corepack and install dependencies
+RUN corepack enable
 RUN yarn install
 
-# Copy the rest of the application code
-COPY . .
+# Copy project files
+COPY prisma ./prisma
+COPY src ./src
+COPY tsconfig.json ./
 
-# Expose the application port
-EXPOSE 3000
+# Generate Prisma client
+RUN yarn prisma generate
 
-# Start the application
-#CMD ["sh", "-c", "npx prisma migrate deploy && yarn dev"]
-CMD ["yarn","migrate"]
-CMD ["yarn", "dev"]
+# Build TypeScript
+RUN yarn build
+
+# Expose port
+EXPOSE 4000
+
+# Set environment variables
+ENV NODE_ENV=production
+
+# Start the server
+CMD ["yarn", "start-production"]

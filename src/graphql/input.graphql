@@ -1,0 +1,11 @@
+input CreateProductDto {
+    name: String!
+    description: String!
+    price: Float!
+    category: String
+}
+input CreateVariantDto {
+    name: String!
+    price: Float!
+    productId: Int!
+}

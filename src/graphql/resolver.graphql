@@ -1,0 +1,40 @@
+type Query {
+    getProducts(
+        filter: String,
+        sortKey: String,
+        reverse:Boolean,
+        take : Int,
+        skip : Int,
+        variantTake : Int,
+        variantSkip : Int
+    ): [Product!]!
+
+    getProduct(
+        id: Int!,
+        variantTake : Int,
+        variantSkip : Int
+    ): Product
+
+    getVariants(
+        filter: String,
+        sortKey: String,
+        reverse:Boolean,
+        take : Int,
+        skip : Int
+    ): [Variant!]!
+
+    getVariant(
+        id: Int!
+    ): Variant!
+
+}
+
+type Mutation {
+    createProduct(
+        input:CreateProductDto
+    ): Product!
+
+    createVariant(
+        input:CreateVariantDto
+    ): Variant!
+}

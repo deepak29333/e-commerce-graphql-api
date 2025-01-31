@@ -5,12 +5,10 @@
   "main": "scr/index.ts",
   "author": "Deepak",
   "license": "MIT",
-  "require": {
-    "node": ">=22.0.0"
-  },
+  "type": "module",
   "scripts": {
     "migrate": "prisma migrate dev",
-    "dev": "ts-node src/index.ts",
+    "dev": "tsx src/index.ts",
     "start": "docker-compose -f docker-compose.yml up -d && prisma migrate dev",
     "stop": "docker-compose -f docker-compose.yml down",
     "build": "rimraf dist && tsc && prisma generate",
@@ -36,7 +34,6 @@
     "koa-bodyparser": "^4.4.1",
     "koa-router": "^13.0.1",
     "prisma": "^6.0.1",
-    "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   },
   "packageManager": "yarn@4.5.3",
@@ -45,7 +42,8 @@
     "@types/koa-bodyparser": "^4",
     "@types/koa-router": "^7.4.8",
     "pre-commit": "^1.2.2",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.0.1",
+    "tsx": "^4.19.2"
   },
   "prisma": {
     "schema": "./prisma/schema.prisma"

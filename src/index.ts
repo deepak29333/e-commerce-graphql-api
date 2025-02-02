@@ -3,15 +3,15 @@ import {ApolloServer} from '@apollo/server';
 import {startStandaloneServer} from '@apollo/server/standalone';
 import {mergeTypeDefs} from '@graphql-tools/merge';
 import {loadFilesSync} from '@graphql-tools/load-files';
-import {resolvers} from './resolvers/resolvers';
-import {prisma} from './db/prismaClient';
+import {prisma} from 'db/prismaClient';
 import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
+import {resolver} from 'resolvers/resolver';
 
 const typesArray = loadFilesSync('./src/graphql/*.graphql');
 const typeDefs = mergeTypeDefs(typesArray);
-const schema = makeExecutableSchema({typeDefs, resolvers});
+const schema = makeExecutableSchema({typeDefs, resolvers: resolver});
 
 const PORT = Number(process.env.PORT || 4000);
 

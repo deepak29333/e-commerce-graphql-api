@@ -7,12 +7,17 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
+
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag deepak29333/e-commerce-graphql-api:latest
+
+    - name: Push the Docker image
+      run: docker push deepak29333/e-commerce-graphql-api:latest

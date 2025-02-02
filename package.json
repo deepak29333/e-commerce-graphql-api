@@ -2,10 +2,9 @@
   "name": "graphql-api",
   "version": "0.0.1",
   "description": "practicing graphql api to get hands on experience",
-  "main": "scr/index.ts",
+  "main": "src/index.ts",
   "author": "Deepak",
   "license": "MIT",
-  "type": "module",
   "scripts": {
     "migrate": "prisma migrate dev",
     "dev": "tsx src/index.ts",
@@ -17,23 +16,26 @@
     "vercel-build": "prisma migrate deploy && npm run build",
     "start-production": "prisma migrate deploy && node ./dist/index.js"
   },
+  "engines": {
+    "node": ">=22.4.0"
+  },
   "pre-commit": [
     "ts.check",
     "build",
     "add-build"
   ],
   "dependencies": {
-    "@apollo/server": "^4.11.2",
+    "@apollo/server": "^4.11.3",
     "@graphql-tools/load-files": "^7.0.0",
     "@graphql-tools/merge": "^9.0.12",
-    "@prisma/client": "^6.0.1",
+    "@prisma/client": "^6.3.0",
     "@types/node": "^22.10.1",
     "apollo-server": "^3.13.0",
     "graphql": "^16.9.0",
     "koa": "^2.15.3",
     "koa-bodyparser": "^4.4.1",
     "koa-router": "^13.0.1",
-    "prisma": "^6.0.1",
+    "prisma": "^6.3.0",
     "typescript": "^5.7.2"
   },
   "packageManager": "yarn@4.5.3",

@@ -3,11 +3,11 @@ import {ApolloServer} from '@apollo/server';
 import {startStandaloneServer} from '@apollo/server/standalone';
 import {mergeTypeDefs} from '@graphql-tools/merge';
 import {loadFilesSync} from '@graphql-tools/load-files';
-import {prisma} from 'db/prismaClient';
+import {prisma} from './db/prismaClient';
 import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
-import {resolver} from 'resolvers/resolver';
+import {resolver} from './resolvers/resolver';
 
 const typesArray = loadFilesSync('./src/graphql/*.graphql');
 const typeDefs = mergeTypeDefs(typesArray);
@@ -31,12 +31,14 @@ const server = new ApolloServer({
   introspection: true,
 });
 
-const {url} = await startStandaloneServer(server, {
-  context: async () => ({prisma}),
-  listen: {port: PORT},
-});
+(async () => {
+  const {url} = await startStandaloneServer(server, {
+    context: async () => ({prisma}),
+    listen: {port: PORT},
+  });
 
-console.log(`🚀 Server ready at ${url}`);
+  console.log(`🚀 Server ready at ${url}`);
+})();
 
 app.listen(3000, () => {
   console.log('Koa server running on port 3000');

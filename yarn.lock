@@ -923,15 +923,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/esm@npm:^3":
-  version: 3.2.2
-  resolution: "@types/esm@npm:3.2.2"
-  dependencies:
-    "@types/node": "npm:*"
-  checksum: 10c0/4285ec39ab1d4b674145415f0a74badc6231452f1ae9a36df05d2f6f8f25256ceb4d3e1efca6812533cee68349d57fe5b1bf2d29c4519c095dc226b34ad9370a
-  languageName: node
-  linkType: hard
-
 "@types/express-serve-static-core@npm:4.17.31":
   version: 4.17.31
   resolution: "@types/express-serve-static-core@npm:4.17.31"
@@ -1930,13 +1921,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esm@npm:^3.2.25":
-  version: 3.2.25
-  resolution: "esm@npm:3.2.25"
-  checksum: 10c0/8e60e8075506a7ce28681c30c8f54623fe18a251c364cd481d86719fc77f58aa055b293d80632d9686d5408aaf865ffa434897dc9fd9153c8b3f469fad23f094
-  languageName: node
-  linkType: hard
-
 "etag@npm:~1.8.1":
   version: 1.8.1
   resolution: "etag@npm:1.8.1"
@@ -2217,13 +2201,11 @@ __metadata:
     "@graphql-tools/load-files": "npm:^7.0.0"
     "@graphql-tools/merge": "npm:^9.0.12"
     "@prisma/client": "npm:^6.3.0"
-    "@types/esm": "npm:^3"
     "@types/koa": "npm:^2"
     "@types/koa-bodyparser": "npm:^4"
     "@types/koa-router": "npm:^7.4.8"
     "@types/node": "npm:^22.10.1"
     apollo-server: "npm:^3.13.0"
-    esm: "npm:^3.2.25"
     graphql: "npm:^16.9.0"
     koa: "npm:^2.15.3"
     koa-bodyparser: "npm:^4.4.1"
